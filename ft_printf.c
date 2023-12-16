@@ -20,9 +20,8 @@
 
 
 
-void	ft_printf(const char *container, ...)
+void	ft_printf(char const *container, ...)
 {
-	int	next_arg;
 	int	idx;
 	va_list	args;
 
@@ -31,11 +30,15 @@ void	ft_printf(const char *container, ...)
 	idx = 0;
 	while (container[idx])
 	{
-		if (container[idx] == '%' && container[idx + 1] == 'd' && container[idx - 1] != '\\')
+		if (container[idx] == '%' && container[idx + 1] == 'd')
 		{
 			idx++;
-			next_arg = va_arg(args, int);
-			idx += ft_putnbr_fd(next_arg, 0);
+			idx += ft_putnbr_fd(va_arg(args, int), 0);
+		}
+		if (container[idx] == '%' && container[idx + 1] == '%')
+		{
+			idx++;
+			idx += ft_putchar_fd('%', 0);
 		}
 		else
 			idx += ft_putchar_fd(container[idx], 0);
@@ -46,6 +49,7 @@ void	ft_printf(const char *container, ...)
 
 int	main(void)
 {
-	ft_printf("n1: %d\%\nn2: %d\%\nn3: %d\%\n", 1, 2, 3);
+	ft_printf("n1: %d%%\nn2: %d%%\nn3: %d%%\n", 1, 2, 3);
+	printf("numero decimal base 10: %u\n", 42);
 	return (0);
 }
