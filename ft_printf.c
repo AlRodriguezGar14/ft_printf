@@ -28,6 +28,7 @@
 // libftprintf.a
 
 #include <stdarg.h>
+#include <stdio.h>
 #include "libft.h"
 
 typedef int (*Printer)(int, int);
@@ -41,23 +42,15 @@ void	ft_printf(char const *container, ...)
 	Printer content_printers[256] = {0};
 
 	content_printers['d'] = ft_putnbr_fd;
+	content_printers['%'] = ft_putchar_fd;
 
 	va_start(args, container);
 
 	idx = 0;
 	while (container[idx])
 	{
-		if (container[idx] == '%' && container[idx + 1] == 'd')
-		{
-			idx++;
-			// idx += ft_putnbr_fd(va_arg(args, int), 0);
-			content_printers[(char)container[idx]](va_arg(args, int), 0);
-		}
-		if (container[idx] == '%' && container[idx + 1] == '%')
-		{
-			idx++;
-			idx += ft_putchar_fd('%', 0);
-		}
+		if (container[idx] == '%' && ft_strchr("djk", container[++idx]))
+			idx += content_printers[(char)container[idx]](va_arg(args, int), 0);
 		else
 			idx += ft_putchar_fd(container[idx], 0);
 	}
@@ -67,7 +60,8 @@ void	ft_printf(char const *container, ...)
 
 int	main(void)
 {
-	ft_printf("n1: %d%%\nn2: %d%%\nn3: %d%%\n", 1, 2, 3);
-	printf("numero decimal base 10: %u\n", 42);
+	ft_printf("n1: %d%%\nn2: %d%%\nn3: %d%%\n%%\n", 1, 2, 3);
+	printf("original:\n");
+	printf("n1: %d%%\nn2: %d%%\nn3: %d%%\n%%\n", 1, 2, 3);
 	return (0);
 }
