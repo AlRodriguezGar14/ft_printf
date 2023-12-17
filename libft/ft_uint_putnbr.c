@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*   ft_uint_putnbr.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alberrod <alberrod@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 21:14:24 by alberrod          #+#    #+#             */
-/*   Updated: 2023/12/17 22:54:47 by alberrod         ###   ########.fr       */
+/*   Updated: 2023/12/17 23:44:46 by alberrod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	get_length(int n)
+static ssize_t	get_length(size_t n)
 {
-	int	len;
+	ssize_t	len;
 
 	len = 1;
 	while (n > 0)
@@ -25,9 +25,9 @@ static int	get_length(int n)
 	return (len);
 }
 
-static int	get_operator(long n)
+static ssize_t	get_operator(size_t n)
 {
-	int	operator;
+	ssize_t	operator;
 
 	operator = 1;
 	while (n > 9)
@@ -38,12 +38,12 @@ static int	get_operator(long n)
 	return (operator);
 }
 
-static size_t	write_number(int simbol, long out_n, int operator)
+static size_t	write_number(ssize_t simbol, size_t out_n, size_t operator)
 {
-	int		idx;
-	int		len;
+	ssize_t		idx;
+	ssize_t		len;
 	char	to_print;
-	int		simbol_space;
+	ssize_t		simbol_space;
 
 	simbol_space = 1;
 	len = get_length(operator);
@@ -64,11 +64,11 @@ static size_t	write_number(int simbol, long out_n, int operator)
 	return (len - simbol_space);
 }
 
-size_t	ft_putnbr(int n)
+size_t	ft_uint_putnbr(unsigned int n)
 {
-	int		operator;
-	long	simbol;
-	long	out_n;
+	ssize_t	operator;
+	size_t	simbol;
+	size_t	out_n;
 
 	if (n < 0)
 		simbol = -1;

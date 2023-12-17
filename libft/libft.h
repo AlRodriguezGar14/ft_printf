@@ -6,7 +6,7 @@
 /*   By: alberrod <alberrod@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 22:17:45 by alberrod          #+#    #+#             */
-/*   Updated: 2023/12/17 22:27:02 by alberrod         ###   ########.fr       */
+/*   Updated: 2023/12/17 23:45:11 by alberrod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ void	ft_putstr_fd(char *s, int fd);
 size_t	ft_putstr(char *s);
 void	ft_putendl_fd(char *s, int fd);
 size_t	ft_putnbr_fd(int n, int fd);
-size_t	ft_putnbr(int n);
+size_t	ft_signed_int_putnbr(int n);
+size_t	ft_uint_putnbr(unsigned int n);
 t_list	*ft_lstnew(void *content);
 void	ft_lstadd_front(t_list **lst, t_list *new);
 int		ft_lstsize(t_list *list);

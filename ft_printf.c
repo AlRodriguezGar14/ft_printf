@@ -6,7 +6,7 @@
 /*   By: alberrod <alberrod@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 18:33:47 by alberrod          #+#    #+#             */
-/*   Updated: 2023/12/17 22:55:26 by alberrod         ###   ########.fr       */
+/*   Updated: 2023/12/17 23:59:29 by alberrod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,16 @@ ssize_t	ft_printf(char const *container, ...)
 		if (*container == '%')
 		{
 			container++;
-			if (*container == 'd')
-				len += ft_putnbr(va_arg(args, int));
+			if (ft_strchr("di", *container))
+				len += ft_signed_int_putnbr(va_arg(args, int));
+			if (*container == 'u')
+				len += ft_uint_putnbr(va_arg(args, unsigned int));
 			if (*container == 's')
 				len += ft_putstr(va_arg(args, char *));
+			if (*container == 'c')
+				len += ft_putchar(va_arg(args, int));
+			if (*container == '%' )
+				len += ft_putchar(*container);
 					
 		}
 		else
@@ -42,8 +48,14 @@ ssize_t	ft_printf(char const *container, ...)
 
 int	main(void)
 {
-	size_t len_mine = ft_printf("%s: %d\nThis is a null line: %s\n", "print my nummber", -42, NULL);
-	size_t len_orig = printf("%s: %d\nThis is a null line: %s\n", "print my nummber", -42, NULL);
+	printf("============\n");
+	size_t len_mine = ft_printf("%s: %d%%\nThis is a null line: %s\n", "print my nummber", -42, NULL);
+	printf("============\n");
+	size_t len_orig = printf("%s: %d%%\nThis is a null line: %s\n", "print my nummber", -42, NULL);
+	printf("============\n");
+	ft_printf("my negative unsigned %u\n", -2);
+	printf("negative unsigned %u\n", -2);
+	printf("============\n");
 
 	printf("len mine: %zu\nlen orig: %zu\n", len_mine, len_orig);
 	return (0);
