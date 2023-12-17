@@ -33,7 +33,6 @@
 
 typedef int (*Printer)(int, int);
 
-
 void	ft_printf(char const *container, ...)
 {
 	int	idx;
@@ -46,13 +45,24 @@ void	ft_printf(char const *container, ...)
 
 	va_start(args, container);
 
-	idx = 0;
-	while (container[idx])
+	idx = -1;
+	while (container[++idx])
 	{
-		if (container[idx] == '%' && ft_strchr("djk", container[++idx]))
-			idx += content_printers[(char)container[idx]](va_arg(args, int), 0);
+		if (container[idx] == '%') 
+		{
+			idx++;
+			if (ft_strchr("djk", container[idx]))
+				content_printers[(char)container[idx]](va_arg(args, int), 1);
+			else if (ft_strchr("s", container[idx]))
+			{
+				ft_putstr_fd(va_arg(args, char*), 1);
+			}
+			else if (container[idx] == '%')
+				ft_putchar_fd('%', 1);
+}
+
 		else
-			idx += ft_putchar_fd(container[idx], 0);
+			ft_putchar_fd(container[idx], 1);
 	}
 
 	va_end(args);
@@ -60,8 +70,8 @@ void	ft_printf(char const *container, ...)
 
 int	main(void)
 {
-	ft_printf("n1: %d%%\nn2: %d%%\nn3: %d%%\n%%\n", 1, 2, 3);
+	ft_printf("n1: %d%%\nn2: %d%%\nn3: %d%%\n%%\n%s\n", 1, 2, 3, "hey");
 	printf("original:\n");
-	printf("n1: %d%%\nn2: %d%%\nn3: %d%%\n%%\n", 1, 2, 3);
+	printf("n1: %d%%\nn2: %d%%\nn3: %d%%\n%%\n%s\n", 1, 2, 3, "heyyyyyy");
 	return (0);
 }
