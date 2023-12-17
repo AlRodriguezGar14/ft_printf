@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alberrod <alberrod@student.42urduliz.com>  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/17 02:27:12 by alberrod          #+#    #+#             */
+/*   Updated: 2023/12/17 02:27:13 by alberrod         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 // TODO:
 // implement: cspdiuxX %
 // Tienes que implementar las siguientes conversiones:
@@ -18,12 +30,17 @@
 #include <stdarg.h>
 #include "libft.h"
 
+typedef int (*Printer)(int, int);
 
 
 void	ft_printf(char const *container, ...)
 {
 	int	idx;
 	va_list	args;
+
+	Printer content_printers[256] = {0};
+
+	content_printers['d'] = ft_putnbr_fd;
 
 	va_start(args, container);
 
@@ -33,7 +50,8 @@ void	ft_printf(char const *container, ...)
 		if (container[idx] == '%' && container[idx + 1] == 'd')
 		{
 			idx++;
-			idx += ft_putnbr_fd(va_arg(args, int), 0);
+			// idx += ft_putnbr_fd(va_arg(args, int), 0);
+			content_printers[(char)container[idx]](va_arg(args, int), 0);
 		}
 		if (container[idx] == '%' && container[idx + 1] == '%')
 		{
