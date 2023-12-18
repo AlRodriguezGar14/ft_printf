@@ -6,11 +6,11 @@
 /*   By: alberrod <alberrod@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 21:18:36 by alberrod          #+#    #+#             */
-/*   Updated: 2023/12/18 20:02:00 by alberrod         ###   ########.fr       */
+/*   Updated: 2023/12/18 20:48:22 by alberrod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 size_t	ft_strlcpy(char *dest, const char *src, size_t size)
 {

@@ -6,11 +6,11 @@
 /*   By: alberrod <alberrod@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 21:14:24 by alberrod          #+#    #+#             */
-/*   Updated: 2023/12/18 20:02:00 by alberrod         ###   ########.fr       */
+/*   Updated: 2023/12/18 20:48:22 by alberrod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 static int	get_length(int n)
 {
@@ -38,7 +38,7 @@ static int	get_operator(long n)
 	return (operator);
 }
 
-static size_t	write_number(int simbol, long out_n, int operator, int fd)
+static void	write_number(int simbol, long out_n, int operator, int fd)
 {
 	int		idx;
 	int		len;
@@ -58,10 +58,9 @@ static size_t	write_number(int simbol, long out_n, int operator, int fd)
 		operator /= 10;
 		idx++;
 	}
-	return (len);
 }
 
-size_t	ft_putnbr_fd(int n, int fd)
+void	ft_putnbr_fd(int n, int fd)
 {
 	int		operator;
 	long	simbol;
@@ -73,5 +72,5 @@ size_t	ft_putnbr_fd(int n, int fd)
 		simbol = 1;
 	out_n = n * simbol;
 	operator = get_operator(out_n);
-	return (write_number(simbol, out_n, operator, fd));
+	write_number(simbol, out_n, operator, fd);
 }

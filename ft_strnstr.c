@@ -6,11 +6,11 @@
 /*   By: alberrod <alberrod@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 21:20:25 by alberrod          #+#    #+#             */
-/*   Updated: 2023/12/18 20:02:00 by alberrod         ###   ########.fr       */
+/*   Updated: 2023/12/18 20:48:22 by alberrod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 // loc is the maximum number of characters to compare in the haystack
 char	*ft_strnstr(const char *haystack, const char *needle, size_t loc)

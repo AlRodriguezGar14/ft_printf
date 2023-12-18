@@ -6,11 +6,11 @@
 /*   By: alberrod <alberrod@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 15:42:39 by alberrod          #+#    #+#             */
-/*   Updated: 2023/12/18 20:02:00 by alberrod         ###   ########.fr       */
+/*   Updated: 2023/12/18 20:48:22 by alberrod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 // I need to use lst clear, because if one node fails allocation,
 // we return the function without the new list (this means, remove
