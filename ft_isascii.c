@@ -1,26 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize_bonus.c                                 :+:      :+:    :+:   */
+/*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alberrod <alberrod@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: alberrod <alberrod@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/13 15:43:06 by alberrod          #+#    #+#             */
-/*   Updated: 2023/12/18 20:02:00 by alberrod         ###   ########.fr       */
+/*   Created: 2023/12/11 21:07:22 by alberrod          #+#    #+#             */
+/*   Updated: 2023/12/11 21:08:50 by alberrod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
-
-int	ft_lstsize(t_list *list)
+int	ft_isascii(int c)
 {
-	int	idx;
-
-	idx = 0;
-	while (list)
-	{
-		idx++;
-		list = list->next;
-	}
-	return (idx);
+	if (c >= 0 && c <= 127)
+		return (1);
+	return (0);
 }

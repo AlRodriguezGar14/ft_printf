@@ -1,26 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize_bonus.c                                 :+:      :+:    :+:   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alberrod <alberrod@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: alberrod <alberrod@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/13 15:43:06 by alberrod          #+#    #+#             */
-/*   Updated: 2023/12/18 20:02:00 by alberrod         ###   ########.fr       */
+/*   Created: 2023/12/11 21:30:59 by alberrod          #+#    #+#             */
+/*   Updated: 2023/12/11 21:33:23 by alberrod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
-
-int	ft_lstsize(t_list *list)
+int	ft_tolower(int c)
 {
-	int	idx;
-
-	idx = 0;
-	while (list)
-	{
-		idx++;
-		list = list->next;
-	}
-	return (idx);
+	if (c >= 'A' && c <= 'Z')
+		return (c + 32);
+	return (c);
 }

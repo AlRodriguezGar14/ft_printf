@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libftprintf.h                                            :+:      :+:    :+:   */
+/*   libftprintf.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alberrod <alberrod@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 22:17:45 by alberrod          #+#    #+#             */
-/*   Updated: 2023/12/18 19:51:47 by alberrod         ###   ########.fr       */
+/*   Updated: 2023/12/18 20:07:01 by alberrod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H 
+#ifndef LIBFTPRINTF_H
+# define LIBFTPRINTF_H 
 
 # include <stdio.h>
 # include <unistd.h>
@@ -58,15 +58,8 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
 void	ft_putchar_fd(char c, int fd);
 int		ft_putchar(char c);
-void	ft_putstr_fd(char *s, int fd);
-size_t	ft_putstr(char *s);
-void	ft_putendl_fd(char *s, int fd);
-size_t	ft_putnbr_fd(int n, int fd);
-size_t	ft_signed_int_putnbr(int n);
-size_t	ft_uint_putnbr(unsigned int n);
-t_list	*ft_lstnew(void *content);
 void	ft_lstadd_front(t_list **lst, t_list *new);
-int		ft_lstsize(t_list *list);
+size_t	ft_lstsize(t_list *list);
 t_list	*ft_lstlast(t_list *lst);
 void	ft_lstadd_back(t_list **lst, t_list *new);
 void	ft_lstdelone(t_list *lst, void (*del)(void *));
@@ -75,10 +68,18 @@ void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 size_t  ft_putnbr_rec(int n, size_t len);
 size_t	ft_puthexa(ssize_t n, char format, size_t len);
+
 size_t	ft_puthexa(ssize_t n, char format, size_t len);
 size_t ft_putaddress(void *p, size_t len);
 size_t	ft_putstr_printf(void *s);
+void	ft_putstr_fd(char *s, int fd);
 // size_t printer(char const *container, va_list args);
 ssize_t	ft_printf(char const *container, ...);
+
+size_t	ft_putstr(char *s);
+
+
+
+size_t	ft_uint_putnbr(unsigned int n);
 
 #endif

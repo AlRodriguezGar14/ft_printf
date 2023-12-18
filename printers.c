@@ -6,11 +6,18 @@
 /*   By: alberrod <alberrod@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 03:35:52 by alberrod          #+#    #+#             */
-/*   Updated: 2023/12/18 15:09:47 by alberrod         ###   ########.fr       */
+/*   Updated: 2023/12/18 20:02:00 by alberrod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./libft/libft.h"
+// #include "./libft/libftprintf.h"
+# include <stdio.h>
+# include <unistd.h>
+# include <string.h>
+# include <stdlib.h>
+# include <stdarg.h>
+# include "libftprintf.h"
+
 
 #define hex "0123456789abcdef"
 #define HEX "0123456789ABCDEF"
@@ -35,7 +42,7 @@ size_t  ft_putnbr_rec(int n, size_t len)
 	return (len);
 }
 
-size_t	ft_puthexa(int n, char format, size_t len)
+size_t	ft_puthexa(ssize_t n, char format, size_t len)
 {
 	if (n > 15)
 		len += ft_puthexa(n / 16, format, len);
@@ -49,9 +56,12 @@ size_t	ft_puthexa(int n, char format, size_t len)
 
 size_t ft_putaddress(void *p, size_t len)
 {
-	ft_putstr("0x1");
-	len += ft_puthexa((ssize_t)p, 'x', 0);
-	return (len + 3);
+	char	*address_prefix;
+
+	address_prefix = ft_strdup("0x");
+	ft_putstr(address_prefix);
+	len += ft_puthexa((ssize_t)p, 'x', len);
+	return (len + ft_strlen(address_prefix));
 }
 
 

@@ -6,25 +6,25 @@
 #    By: alberrod <alberrod@student.42urduliz.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/13 18:30:09 by alberrod          #+#    #+#              #
-#    Updated: 2023/12/18 19:50:12 by alberrod         ###   ########.fr        #
+#    Updated: 2023/12/18 20:10:03 by alberrod         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC       = cc
 HEADERS_DIR = .
 CFLAGS   = -Wall -Wextra -Werror -I $(HEADERS_DIR)
-NAME     = ../libft.a
+NAME     = libftprintf.a
 RM       = rm -rf
 
 CFILES = ft_calloc.c ft_isdigit.c ft_memcmp.c ft_putchar_fd.c ft_split.c \
 	   ft_strjoin.c	ft_strmapi.c ft_strtrim.c ft_isalnum.c	\
-	   ft_isprint.c ft_memcpy.c ft_putendl_fd.c ft_strchr.c ft_strlcat.c \
+	   ft_isprint.c ft_memcpy.c  ft_strchr.c ft_strlcat.c \
 	   ft_strncmp.c	ft_substr.c ft_atoi.c ft_isalpha.c ft_itoa.c \
 	   ft_memmove.c ft_putnbr_fd.c ft_strdup.c ft_strlcpy.c ft_strnstr.c \
 	   ft_tolower.c ft_bzero.c ft_isascii.c ft_memchr.c ft_memset.c \
-	   ft_putstr_fd.c ft_striteri.c ft_strlen.c ft_strrchr.c ft_toupper.c \
+	   ft_putstr_fd.c ft_putendl_fd.c ft_striteri.c ft_strlen.c ft_strrchr.c ft_toupper.c \
 	   ft_putchar.c ft_signed_int_putnbr.c ft_uint_putnbr.c ft_putstr.c \
-		ft_printf.c printers.c
+	   ft_printf.c printers.c
 
 OFILES = $(CFILES:.c=.o)
 
@@ -50,41 +50,7 @@ fclean: clean
 
 re: fclean $(NAME) bonus
 
+test:
+	cc test_printf.c libftprintf.a && ./a.out
+
 .PHONY: all clean fclean re
- 
-# BONUSS = $(wildcard $(BONUS_DIR)/*.c)
-# OBJS := $(SCRS:.c=.o)
-
-# all: $(NAME)
-
-# ${OBJ_DIR}:
-# 	mkdir -p ${OBJ_DIR}
-
-# ${OBJ_DIR}/%.o: ${SRCS} | ${OBJ_DIR}
-# 	$(CC) $(CFLAGS) -c $< -o $@
-
-# $(NAME): ${OBJ_DIR} ${OBJS}
-# 	ar rc $(NAME) $(OBJS)
-	
-
-# ${BONUS_OBJ_DIR}:
-# 	mkdir -p $(BONUS_OBJ_DIR)
-
-# BONUS_OBJS := $(patsubst ${BONUS_DIR}/%.c, ${BONUS_OBJ_DIR}/%.o, ${BONUSS})
-
-# ${BONUS_OBJ_DIR}/%.o: ${BONUS_DIR}/%.c | ${BONUS_OBJ_DIR}
-# 	$(CC) $(CFLAGS) -c $< -o $@
-
-# bonus: ${BONUS_OBJ_DIR} ${BONUS_OBJS}
-# 	ar rc $(NAME) $(BONUS_OBJS)
-# 	ranlib $(NAME)
-
-# clean:
-# 	$(RM) $(OBJ_DIR) $(BONUS_OBJ_DIR)
-
-# fclean: clean
-# 	$(RM) $(NAME)
-
-# re: fclean all
-
-# .PHONY: all clean fclean re

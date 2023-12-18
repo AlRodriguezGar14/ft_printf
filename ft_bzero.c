@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize_bonus.c                                 :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alberrod <alberrod@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: alberrod <alberrod@student.42urduliz.com>      +#+  +:+       +#+    */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/13 15:43:06 by alberrod          #+#    #+#             */
-/*   Updated: 2023/12/18 20:02:00 by alberrod         ###   ########.fr       */
+/*   Created: 2023/12/11 20:55:45 by alberrod          #+#    #+#             */
+/*   Updated: 2023/12/11 20:55:58 by alberrod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include <stdio.h>
 
-int	ft_lstsize(t_list *list)
+void	ft_bzero(void *buffer, size_t len)
 {
-	int	idx;
+	unsigned char	*p;
 
-	idx = 0;
-	while (list)
-	{
-		idx++;
-		list = list->next;
-	}
-	return (idx);
+	p = buffer;
+	while (len--)
+		*p++ = 0;
 }

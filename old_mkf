@@ -1,0 +1,41 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: alberrod <alberrod@student.42urduliz.co    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/12/18 18:33:37 by alberrod          #+#    #+#              #
+#    Updated: 2023/12/18 19:43:27 by alberrod         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+CC       = cc
+HEADERS_DIR = .
+CFLAGS   = -Wall -Wextra -Werror -I $(HEADERS_DIR)
+NAME     = libftprintf.a
+RM       = rm -rf
+
+CFILES = ft_printf.c printers.c
+
+OFILES = $(CFILES:.c=.o)
+
+all: $(NAME)
+
+$(NAME): $(OFILES)
+	ar rcs $(NAME) $(OFILES)
+
+bonus: $(OBONUSS)
+	ar rcs $(NAME) $(OBONUSS)
+
+clean:
+	$(RM) $(OFILES) $(OBONUSS)
+
+fclean: clean
+	$(RM) $(NAME)
+
+re: fclean $(NAME) bonus
+
+test:
+	cc test_printf.c $(NAME) && ./a.out
+.PHONY: all clean fclean re
