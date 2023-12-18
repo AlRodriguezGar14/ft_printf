@@ -7,8 +7,19 @@ int	main(void)
 	ft_printf("%%%c%%", 'x');
 	printf("\n");
 	ft_printf("dgs%Xxx", 10);
-	printf("\n");
 
+	printf("mine");
+	printf("\n");
+	ft_printf("long max %x", 9223372036854775807);
+	printf("\n");
+	ft_printf("long min %x", -9223372036854775807);
+	printf("\n");
+	printf("original");
+	printf("\n");
+	printf("long max %x", 9223372036854775807);
+	printf("\n");
+	printf("long min %x", -9223372036854775807);
+	printf("\n");
 	return(0);
 }
 

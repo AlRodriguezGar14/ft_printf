@@ -6,7 +6,7 @@
 /*   By: alberrod <alberrod@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 21:14:24 by alberrod          #+#    #+#             */
-/*   Updated: 2023/12/18 20:48:22 by alberrod         ###   ########.fr       */
+/*   Updated: 2023/12/19 00:28:25 by alberrod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,20 @@ static int	get_operator(long n)
 	return (operator);
 }
 
-static void	write_number(int simbol, long out_n, int operator, int fd)
+size_t	write_number(int simbol, long out_n, int operator, int fd)
 {
 	int		idx;
-	int		len;
+	ssize_t	len;
 	char	to_print;
+	int		neg_simbol_space_left;
 
 	len = get_length(operator);
 	idx = 0;
+	neg_simbol_space_left = 1;
 	if (simbol < 0)
 	{
 		write(fd, "-", 1);
+		neg_simbol_space_left--;
 	}
 	while (idx < len - 1)
 	{
@@ -58,9 +61,10 @@ static void	write_number(int simbol, long out_n, int operator, int fd)
 		operator /= 10;
 		idx++;
 	}
+	return ((size_t)len - neg_simbol_space_left);
 }
 
-void	ft_putnbr_fd(int n, int fd)
+size_t	ft_putnbr_fd(int n, int fd)
 {
 	int		operator;
 	long	simbol;
@@ -72,5 +76,5 @@ void	ft_putnbr_fd(int n, int fd)
 		simbol = 1;
 	out_n = n * simbol;
 	operator = get_operator(out_n);
-	write_number(simbol, out_n, operator, fd);
+	return (write_number(simbol, out_n, operator, fd));
 }
