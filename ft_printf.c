@@ -6,12 +6,13 @@
 /*   By: alberrod <alberrod@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 18:33:47 by alberrod          #+#    #+#             */
-/*   Updated: 2023/12/17 23:59:29 by alberrod         ###   ########.fr       */
+/*   Updated: 2023/12/18 04:24:24 by alberrod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
 #include "./libft/libft.h"
+#include "printers.c"
 
 
 ssize_t	ft_printf(char const *container, ...)
@@ -28,7 +29,9 @@ ssize_t	ft_printf(char const *container, ...)
 		{
 			container++;
 			if (ft_strchr("di", *container))
-				len += ft_signed_int_putnbr(va_arg(args, int));
+				len += ft_putnbr_rec(va_arg(args, int), 0);
+			if (ft_strchr("xX", *container))
+				len += ft_puthexa(va_arg(args, int), *container, 0);
 			if (*container == 'u')
 				len += ft_uint_putnbr(va_arg(args, unsigned int));
 			if (*container == 's')
