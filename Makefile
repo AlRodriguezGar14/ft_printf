@@ -6,7 +6,7 @@
 #    By: alberrod <alberrod@student.42urduliz.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/13 18:30:09 by alberrod          #+#    #+#              #
-#    Updated: 2023/12/18 20:48:43 by alberrod         ###   ########.fr        #
+#    Updated: 2023/12/18 21:35:04 by alberrod         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,8 @@ CFILES = ft_calloc.c ft_isdigit.c ft_memcmp.c ft_putchar_fd.c ft_split.c \
 	   ft_putstr_fd.c ft_striteri.c ft_strlen.c ft_strrchr.c ft_toupper.c \
 	   ft_lstadd_back_bonus.c ft_lstdelone_bonus.c ft_lstmap_bonus.c \
 	   ft_lstadd_front_bonus.c ft_lstiter_bonus.c ft_lstnew_bonus.c \
-	   ft_lstclear_bonus.c ft_lstlast_bonus.c ft_lstsize_bonus.c
+	   ft_lstclear_bonus.c ft_lstlast_bonus.c ft_lstsize_bonus.c ft_putchar.c \
+	   ft_uint_putnbr.c ft_printf.c
 
 OFILES = $(CFILES:.c=.o)
 
@@ -41,6 +42,9 @@ fclean: clean
 	$(RM) $(NAME)
 
 re: fclean $(NAME)
+
+test: 
+	cc tester.c libftprintf.a && ./a.out
 
 .PHONY: all clean fclean re
  
