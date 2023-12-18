@@ -47,15 +47,12 @@ size_t ft_putaddress(void *p, size_t len)
 }
 
 
-size_t	ft_putstr_printf(void *s)
+size_t	ft_putstr_printf(char *s)
 {
-	char *str;
-
-	str = (char *)s;
-	if ( !str)
-		str = ft_strdup("(null)");
-	write(1, str, ft_strlen(str));
-	return (ft_strlen(str));
+	if ( !s)
+		s = "(null)";
+	write(1, s, ft_strlen(s));
+	return (ft_strlen(s));
 }
 
 size_t printer(char const *container, va_list args)
@@ -93,6 +90,7 @@ ssize_t	ft_printf(char const *container, ...)
 			len += ft_putchar(*container);
 		container++;
 	}
+	va_end(args);
 	return (len);
 }
 

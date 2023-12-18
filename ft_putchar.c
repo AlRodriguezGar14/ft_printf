@@ -6,7 +6,7 @@
 /*   By: alberrod <alberrod@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 21:13:36 by alberrod          #+#    #+#             */
-/*   Updated: 2023/12/18 21:21:55 by alberrod         ###   ########.fr       */
+/*   Updated: 2023/12/18 22:55:00 by alberrod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 int	ft_putchar(char c)
 {
-	write(0, &c, 1);
+	write(1, &c, 1);
 	return (1);
 }

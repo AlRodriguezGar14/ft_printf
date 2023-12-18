@@ -6,13 +6,13 @@
 #    By: alberrod <alberrod@student.42urduliz.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/13 18:30:09 by alberrod          #+#    #+#              #
-#    Updated: 2023/12/18 21:35:04 by alberrod         ###   ########.fr        #
+#    Updated: 2023/12/18 22:33:05 by alberrod         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC       = cc
 HEADERS_DIR = .
-CFLAGS   = -Wall -Wextra -Werror -I $(HEADERS_DIR)
+CFLAGS   = -Wall -Wextra -Werror -g -I $(HEADERS_DIR)
 NAME     = libftprintf.a
 RM       = rm -rf
 
@@ -44,7 +44,7 @@ fclean: clean
 re: fclean $(NAME)
 
 test: 
-	cc tester.c libftprintf.a && ./a.out
+	cc tester.c libftprintf.a -g && ./a.out
 
 .PHONY: all clean fclean re
  
