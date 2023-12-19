@@ -3,6 +3,8 @@
 #include <unistd.h>
 #include <stdio.h>
 
+# define MAX_UINT_LEN 12
+
 int	print_char(int c)
 {
 	return write(1, &c, 1);
@@ -10,26 +12,33 @@ int	print_char(int c)
 
 int	print_nbr(long n, int base)
 {
-	int count = 0;
+	int	count;
+	int	idx;
+    char hex[] = "0123456789abcdef";
+	char	buffer[MAX_UINT_LEN];
 
-	char hex[16] = "0123456789abcdef";
-
+	count = 0;
 	if (n < 0)
 	{
-		if (base == 10)
-			count = print_char('-');
+		count += print_char('-');
 		n = -n;
 	}
-	if (n >= base)
-		count += print_nbr(n / base, base);
-	
-	return (print_char(hex[n % base]));
+	if (n == 0)
+		return print_char('0');
+	idx = 0;
+	while (n > 0)
+	{
+		buffer[idx++] = hex[n % base];
+		n /= base;
+	}
+	while (idx--)
+		count += print_char(buffer[idx]);
+	return (count);
 }
+
 
 int	print_content(char fmt, va_list *arg)
 {
-	int count = 0;
-
 	if (fmt == 'c')
 		return print_char(va_arg(*arg, int));
 	if (fmt == 'd')
@@ -66,9 +75,10 @@ int	main(void)
 {
 	ft_printf("%cbr = %d",'N', -69);
 	ft_printf("\n");
-	ft_printf("%cbr = %x",'N', -15);
+	int mine_len = ft_printf("p%cintf: %x - %d%%", 'l', -15, -15);
 	ft_printf("\n");
-	printf("original: %x", -15);
+	int original_len = printf("p%cintf: %x - %d%%",'r', -15, -15);
+	printf("\nmy len: %d\noriginal len: %d", mine_len, original_len);
 	printf("\n");
 	return (0);
 }	
