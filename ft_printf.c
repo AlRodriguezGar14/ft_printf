@@ -49,20 +49,20 @@ size_t	ft_putstr_printf(char *s)
 	return (ft_strlen(s));
 }
 
-size_t printer(char const *container, va_list args)
+size_t printer(char const *container, va_list *args)
 {
 	if (ft_strchr("di", *container))
-		return ft_putnbr_fd(va_arg(args, int), 1);
+		return ft_putnbr_fd(va_arg(*args, int), 1);
 	if (ft_strchr("xX", *container))
-		return ft_puthexa(va_arg(args, size_t), *container, 0);
+		return ft_puthexa(va_arg(*args, size_t), *container, 0);
 	if (*container == 'p')
-		return ft_putaddress(va_arg(args, unsigned long), 0);
+		return ft_putaddress(va_arg(*args, unsigned long), 0);
 	if (*container == 'u')
-		return ft_uint_putnbr(va_arg(args, unsigned int));
+		return ft_uint_putnbr(va_arg(*args, unsigned int));
 	if (*container == 's')
-		return ft_putstr_printf(va_arg(args, void *));
+		return ft_putstr_printf(va_arg(*args, void *));
 	if (*container == 'c')
-		return ft_putchar(va_arg(args, int));
+		return ft_putchar(va_arg(*args, int));
 	if (*container == '%' )
 		return ft_putchar(*container);
 	return (0);
@@ -79,7 +79,7 @@ ssize_t	ft_printf(char const *container, ...)
 	while (*container)
 	{
 		if (*container == '%')
-			len += printer(++container, args);
+			len += printer(++container, &args);
 		else
 			len += ft_putchar(*container);
 		container++;
