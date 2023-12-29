@@ -1,5 +1,6 @@
 {
-	"files.associations": {
-		"climits": "cpp"
-	}
+  "files.associations": {
+    "climits": "cpp",
+    "ft_printf.h": "c"
+  }
 }
