@@ -1,95 +1,56 @@
-#include <stdarg.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alberrod <alberrod@student.42urduliz.co    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/20 02:25:23 by alberrod          #+#    #+#             */
+/*   Updated: 2023/12/20 05:16:27 by alberrod         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
-# define hex "0123456789abcdef"
-# define HEX "0123456789ABCDEF"
-
-// size_t  ft_putnbr_rec(int n, size_t len)
-// {
-//     long nbr;
-
-//     nbr = (long)n;
-//     if (nbr < 0)
-//     {
-//         len += ft_putchar('-');
-//         nbr = -nbr;
-//     }
-//     if (nbr > 9)
-//         len = ft_putnbr_rec(nbr / 10, len);
-//     len += ft_putchar((nbr % 10) + '0');
-//     return (len);
-// }
-
-
-size_t	ft_puthexa(size_t n, char format, size_t len)
+static int	print_content(char c, va_list *argp)
 {
-	if (n > 15)
-		len += ft_puthexa(n / 16, format, len);
-	if (format == 'X')
-		ft_putchar(HEX[n % 16]);
+	int	count;
+
+	count = 0;
+	if (c == 'c')
+		count += ft_printchar(va_arg(*argp, int));
+	else if ((c == 'd') || (c == 'i'))
+		count += ft_printnbr((long)va_arg(*argp, int), 10, HEXL);
+	else if (c == 'u')
+		count += ft_printnbr((long)va_arg(*argp, unsigned int), 10, HEXL);
+	else if (c == 'x')
+		count += ft_printnbr((long)va_arg(*argp, unsigned int), 16, HEXL);
+	else if (c == 'X')
+		count += ft_printnbr((long)va_arg(*argp, unsigned int), 16, HEXU);
+	else if (c == 's')
+		count += ft_printstr(va_arg(*argp, void *));
+	else if (c == 'p')
+		count += ft_print_addr((unsigned long)va_arg(*argp, void *), 16, HEXL);
 	else
-		ft_putchar(hex[n % 16]);
-	len++;
-	return (len);
+		count += ft_printchar(c);
+	return (count);
 }
 
-size_t ft_putaddress(unsigned long p, size_t len)
+int	ft_printf(const char *fmt, ...)
 {
-	write(1, "0x", 2);
-	len += ft_puthexa((unsigned long)p, 'x', len);
-	return (len + 2);
-}
+	va_list	argp;
+	int		count;
 
-
-size_t	ft_putstr_printf(char *s)
-{
-	if ( !s)
-		s = "(null)";
-	write(1, s, ft_strlen(s));
-	return (ft_strlen(s));
-}
-
-size_t printer(char const *container, va_list *args)
-{
-	if (ft_strchr("di", *container))
-		return ft_putnbr_fd(va_arg(*args, int), 1);
-	if (ft_strchr("xX", *container))
-		return ft_puthexa(va_arg(*args, size_t), *container, 0);
-	if (*container == 'p')
-		return ft_putaddress(va_arg(*args, unsigned long), 0);
-	if (*container == 'u')
-		return ft_uint_putnbr(va_arg(*args, unsigned int));
-	if (*container == 's')
-		return ft_putstr_printf(va_arg(*args, void *));
-	if (*container == 'c')
-		return ft_putchar(va_arg(*args, int));
-	if (*container == '%' )
-		return ft_putchar(*container);
-	return (0);
-}
-
-
-ssize_t	ft_printf(char const *container, ...)
-{
-	va_list	args;
-	size_t	len;
-
-	va_start(args, container);
-	len = 0;
-	while (*container)
+	va_start(argp, fmt);
+	count = 0;
+	while (*fmt)
 	{
-		if (*container == '%')
-			len += printer(++container, &args);
+		if (*fmt == '%')
+			count += print_content(*(++fmt), &argp);
 		else
-			len += ft_putchar(*container);
-		container++;
+			count += write(FD_STDOUT, fmt, 1);
+		++fmt;
 	}
-	va_end(args);
-	return (len);
+	va_end(argp);
+	return (count);
 }
-
-// int	main(void)
-// {
-// 	ft_printf("hi mom, %s", "bye mom");
-// 	return (0);
-// }
